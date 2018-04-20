@@ -1,42 +1,39 @@
 require("dotenv").config();
-
-// Reading and writing the files
 var fs = require("fs");
-
-// Reading the keys
 var keys = require("./keys.js");
+var requirer = require("inquirer"); // Inquirer
+var twitter = require("twitter"); // Twitter
+var spotify = require("node-spotify-api"); // Spotify
+var request = require("request"); // OMDB
+var LIRICommands = process.argv[2]; // 
+var userInput = process.argv[3]; // User input commands
 
-// Requiring inquirer
-var 
+switch(LIRICommands) {
 
+    case 'movie-this':
+    getMovie();
+    break;
 
-// Twitter
-var twitter = require("twitter");
-var client = new twitter(keys.twitter);
+    case 'my-tweets':
+    tweetThis(); // Need to create a function tweetThis()
+    break;
 
-// Function to retrieve my last 20 tweets
-function myTweets() {
+    case 'spotify-this-song':
+    spotifyThis(); // Need to create a function spotifyThis()
+    break;
 
+    case 'do-what-it-says':
+    doThis(); //Need to create a function doThis()
+    break;
+
+    default: console.log("HELLO! MY NAME IS LIRI, COUSIN TO SIRI. TELL ME WHAT YOU'D LIKE ME TO DO BY SELECTING ONE OF THE OPTIONS BELOW \n" 
+        + "\n 1: movie-this 'any movie name' " 
+        + "\n 2: my-tweets 'any tweet' "
+        + "\n 3: spotify-this-song 'any song name' "
+        + "\n 4: do-what-it-says" + "\n\n");
 }
 
-
-
-// Spotify
-var spotify = require("node-spotify-api");
-var Spotify = new spotify(keys.spotify);
-
-// Function to retrieve information about a song
-function findSong () {
-
-}
-
-
-
-
-
-// OMDB
-var request = require("request");
-
+// Command LIRI to retrieve information about a certain movie
 // Requesting OMDB api
 var getMovie = function(movie) {
     var queryURL = "http://www.omdbapi.com/?t=" + movie + "&plot=short&tomatoes=true&apikey=trilogy";
@@ -45,16 +42,19 @@ var getMovie = function(movie) {
 
         // If the request is successful
         if(!error && response.statusCode === 200) {
-
-            console.log("Title: " );
-            console.log("Release Year: ");
-            console.log("IMDB Rating: ");
-            console.log("Rotten Tomatoes Rating: ");
-            console.log("Country: ");
-            console.log("Language: ");
-            console.log("Plot: ");
-            console.log("Actors: ");
+            console.log("Here is the information for " + movie);
+            console.log("Title: " + JSON.parse(body).Title);
+            console.log("Release Year: " + JSON.parse(body).Year);
+            console.log("IMDB Rating: " + JSON.parse(body).imdbRating);
+            console.log("Rotten Tomatoes Rating: " + JSON.parse(body).Ratings[1].Value);
+            console.log("Country: " + JSON.parse(body).Country);
+            console.log("Language: " + JSON.parse(body).Language);
+            console.log("Plot: " + JSON.parse(body).Plot);
+            console.log("Actors: " + JSON.parse(body).Actors);
+        } else {
+            console.log(error);
         }
-
     });
 }
+
+
