@@ -67,7 +67,7 @@ function tweetThis() {
             console.log(error);
         };
         for(var i = 0; i < tweets.length; i++) {
-            cosole.log(tweets[i]);
+            cosole.log(tweets[i].text);
         };
     });
 };
