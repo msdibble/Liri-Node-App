@@ -85,7 +85,7 @@ function spotifyThis() {
         songName = "The Sign";
     }
 
-    spotify.search({type: 'track', query: songName}, function(error, data){
+    Spotify.search({type: 'track', query: songName}, function(error, data){
         if (error) {
             console.log('Error occured' + error);
         } else {
