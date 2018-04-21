@@ -11,33 +11,29 @@ var userInput = process.argv[3]; // User input commands
 switch(LIRICommands) {
 
     case 'movie-this':
-    getMovie();
+    movieThis();
     break;
 
-    case 'my-tweets':
-    tweetThis(); // Need to create a function tweetThis()
-    break;
+    // case 'my-tweets':
+    // tweetThis(); // Need to create a function tweetThis()
+    // break;
 
-    case 'spotify-this-song':
-    spotifyThis(); // Need to create a function spotifyThis()
-    break;
+    // case 'spotify-this-song':
+    // spotifyThis(); // Need to create a function spotifyThis()
+    // break;
 
-    case 'do-what-it-says':
-    doThis(); //Need to create a function doThis()
-    break;
+    // case 'do-what-it-says':
+    // doThis(); //Need to create a function doThis()
+    // break;      
+};
 
-    default: console.log("HELLO! MY NAME IS LIRI, COUSIN TO SIRI. TELL ME WHAT YOU'D LIKE ME TO DO BY SELECTING ONE OF THE OPTIONS BELOW \n" 
-        + "\n 1: movie-this 'any movie name' " 
-        + "\n 2: my-tweets 'any tweet' "
-        + "\n 3: spotify-this-song 'any song name' "
-        + "\n 4: do-what-it-says" + "\n\n");
-}
+function movieThis() {
+    var movie = userInput;
+    if(!movie) {
+        movie = "mr nobody";
+    }
 
-// Command LIRI to retrieve information about a certain movie
-// Requesting OMDB api
-var getMovie = function(movie) {
     var queryURL = "http://www.omdbapi.com/?t=" + movie + "&plot=short&tomatoes=true&apikey=trilogy";
-
     request(queryURL, function(error, response, body){
 
         // If the request is successful
@@ -55,6 +51,4 @@ var getMovie = function(movie) {
             console.log(error);
         }
     });
-}
-
-
+};
